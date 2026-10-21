@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+    <title>Meet the Creator - ICT Club</title>
+    <style>
+        :root {
+            --red: #b3122b;
+            --red-dark: #7a0c1e;
+            --gold: #f0b323;
+            --gold-light: #ffd966;
+            --steel: #15161a;
+            --steel-light: #23252c;
+            --arc: #7df9ff;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body { height: 100%; margin: 0; }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Rajdhani', sans-serif;
+            color: #f4f4f4;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(179, 18, 43, 0.35), transparent 55%),
+                linear-gradient(180deg, var(--steel) 0%, #0b0b0e 100%);
+        }
+
+        /* Navigation bar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem 1rem;
+            padding: 0.6rem 1.5rem;
+            background: linear-gradient(90deg, var(--red-dark), var(--red) 50%, var(--red-dark));
+            border-bottom: 3px solid var(--gold);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.55);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: 1rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            text-decoration: none;
+        }
+
+        .nav-brand .mini-reactor {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fff 0%, var(--arc) 35%, #1b6f78 70%, #0b2f33 100%);
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 10px var(--arc);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 0.55rem 1rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 0.78rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            text-decoration: none;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid transparent;
+            border-radius: 6px;
+            transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .nav-links a:hover {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: var(--gold);
+            box-shadow: 0 0 12px rgba(240, 179, 35, 0.45);
+        }
+
+        .nav-links a[aria-current="page"] {
+            color: var(--steel);
+            background: var(--gold);
+            border-color: var(--gold-light);
+        }
+
+        .nav-links a:focus-visible,
+        .nav-toggle:focus-visible,
+        .nav-brand:focus-visible {
+            outline: 2px solid var(--arc);
+            outline-offset: 2px;
+        }
+
+        .nav-toggle {
+            display: none;
+            padding: 0.45rem 0.8rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            color: var(--gold-light);
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 720px) {
+            .nav-toggle { display: block; }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+            }
+
+            .nav-links.open { display: flex; }
+
+            .nav-links a { text-align: center; }
+        }
+
+        /* Main */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem 1rem;
+        }
+
+        .profile {
+            width: 100%;
+            max-width: 440px;
+            padding: 2.25rem 2rem 2rem;
+            text-align: center;
+            background: linear-gradient(145deg, var(--steel-light), var(--steel));
+            border: 2px solid var(--gold);
+            border-top: 6px solid var(--red);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(240, 179, 35, 0.05);
+        }
+
+        .photo {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+            border-radius: 50%;
+            border: 4px solid var(--gold);
+            background: radial-gradient(circle, #1b6f78 0%, #0b2f33 100%);
+            box-shadow: 0 0 18px var(--arc), 0 0 40px rgba(125, 249, 255, 0.4);
+        }
+
+        .photo .initials {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: 2.6rem;
+            letter-spacing: 0.05em;
+            color: var(--arc);
+            text-shadow: 0 0 12px var(--arc);
+        }
+
+        .photo img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile h1 {
+            margin: 0 0 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: clamp(1.3rem, 4vw, 1.7rem);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-shadow: 0 0 12px rgba(240, 179, 35, 0.4);
+        }
+
+        .details {
+            margin: 0;
+            text-align: left;
+        }
+
+        .details div {
+            padding: 0.8rem 1.1rem;
+            margin-bottom: 0.75rem;
+            background: rgba(125, 249, 255, 0.07);
+            border-left: 5px solid var(--arc);
+            border-radius: 6px;
+        }
+
+        .details div:last-child { margin-bottom: 0; }
+
+        .details dt {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #c9c9c9;
+        }
+
+        .details dd {
+            margin: 0.2rem 0 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.2rem 1rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            color: #d6d6d6;
+            background: linear-gradient(90deg, var(--red-dark), var(--red), var(--red-dark));
+            border-top: 4px solid var(--gold);
+        }
+
+        footer span { color: var(--gold-light); font-weight: 600; }
+    </style>
+</head>
+<body>
+    <nav class="navbar" aria-label="Main navigation">
+        <a class="nav-brand" href="index.html">
+            <span class="mini-reactor" aria-hidden="true"></span>
+            ICT Club
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links"
+                onclick="var l=document.getElementById('nav-links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o);">
+            Menu
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Homepage</a></li>
+            <li><a href="element-checker.html">Element Checker</a></li>
+            <li><a href="club-members.html">School Club Members</a></li>
+            <li><a href="creator.html" aria-current="page">Meet the Creator</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="profile" aria-labelledby="creator-name">
+            <div class="photo">
+                <span class="initials" aria-hidden="true">JRO</span>
+                <!-- Save the creator's photo as creator.jpg in the same folder as this page -->
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6VPSQhIKyUKf9Bd4inoDSmbX2RO5YSIM1EPU49Uzdsw&s" alt="Photo of Josua Ronnel Ortiz" onerror="this.remove()">
+            </div>
+
+            <h1 id="creator-name">Josua Ronnel Ortiz</h1>
+
+            <dl class="details">
+                <div>
+                    <dt>Grade and Section</dt>
+                    <dd>10-Amethyst</dd>
+                </div>
+                <div>
+                    <dt>Campus</dt>
+                    <dd>Greenhills</dd>
+                </div>
+            </dl>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2026 <span>ICT Club</span> &bull; Meet the Creator
+    </footer>
+</body>
+</html>
